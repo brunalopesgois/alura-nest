@@ -1,3 +1,4 @@
+import { ProdutosService } from './produtos.service';
 import {
   Body,
   Controller,
@@ -12,36 +13,34 @@ import { Produto } from './produto.model';
 
 @Controller('produtos')
 export class ProdutosController {
-  produtos: Produto[] = [
-    new Produto('LV0001', 'Livro show de bola', 45.99),
-    new Produto('LV0002', 'Outro livro massa', 78.56),
-    new Produto('LV0003', 'Livro top demais', 32.12),
-  ];
+  constructor(private produtosService: ProdutosService) {
+    //
+  }
 
   @Get()
   index(): Produto[] {
-    return this.produtos;
+    return this.produtosService.findAll();
   }
 
   @Get(':id')
   show(@Param() params): Produto {
-    return Produto[0];
+    return this.produtosService.findOne(params.id);
   }
 
   @Post()
   store(@Body() produto: Produto): void {
     produto.id = 4;
-    this.produtos.push(produto);
+    this.produtosService.create(produto);
   }
 
   @Put(':id')
   update(@Param() params, @Body() produto: Produto): Produto {
-    return produto;
+    return this.produtosService.update(params.id, produto);
   }
 
   @Delete(':id')
   @HttpCode(204)
   destroy(@Param() params): void {
-    this.produtos.pop();
+    this.produtosService.delete(params.id);
   }
 }
