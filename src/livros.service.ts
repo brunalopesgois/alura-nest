@@ -4,9 +4,9 @@ import { Livro } from './livro.model';
 @Injectable()
 export class LivrosService {
   livros: Livro[] = [
-    new Livro('LV0001', 'Livro show de bola', 45.99),
-    new Livro('LV0002', 'Outro livro massa', 78.56),
-    new Livro('LV0003', 'Livro top demais', 32.12),
+    // new Livro('LV0001', 'Livro show de bola', 45.99),
+    // new Livro('LV0002', 'Outro livro massa', 78.56),
+    // new Livro('LV0003', 'Livro top demais', 32.12),
   ];
 
   findAll(): Livro[] {
