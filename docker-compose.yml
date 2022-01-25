@@ -1,0 +1,13 @@
+version: '3'
+services:
+  mysqldb:
+    image: mysql
+    container_name: livraria-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: nest_livraria
+    ports:
+      - "3306:3306"
+    volumes:
+      - $HOME/Documents/Docker/Volumes/Mysql:/var/lib/mysql
