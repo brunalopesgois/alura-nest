@@ -18,29 +18,31 @@ export class LivrosController {
   }
 
   @Get()
-  index(): Livro[] {
+  async index(): Promise<Livro[]> {
     return this.livrosService.findAll();
   }
 
   @Get(':id')
-  show(@Param() params): Livro {
+  async show(@Param() params): Promise<Livro> {
     return this.livrosService.findOne(params.id);
   }
 
   @Post()
-  store(@Body() livro: Livro): void {
-    livro.id = 4;
+  async store(@Body() livro: Livro) {
     this.livrosService.create(livro);
   }
 
   @Put(':id')
-  update(@Param() params, @Body() livro: Livro): Livro {
+  async update(
+    @Param() params,
+    @Body() livro: Livro,
+  ): Promise<[number, Livro[]]> {
     return this.livrosService.update(params.id, livro);
   }
 
   @Delete(':id')
   @HttpCode(204)
-  destroy(@Param() params): void {
+  async destroy(@Param() params) {
     this.livrosService.delete(params.id);
   }
 }
